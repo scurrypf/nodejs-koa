@@ -3,7 +3,8 @@ const Koa = require('koa');
 const KoaStatic = require('koa-static');
 const KoaMount = require('koa-mount');
 const { koaBody } = require('koa-body');
-const path = require('path')
+const path = require('path');
+const {router} = require('./src/router/index')
 //创建一个koa应用
 const app = new Koa();
 
@@ -63,18 +64,21 @@ app.use(koaBody({
         uploadDir:UPLOAD_URL,
     }
 }));
-app.use(async(ctx,next)=>{
-    console.log(ctx.request.files.image.newFilename)
-    ctx.body = {
-        params:ctx.request.query,
-        url:ctx.request.URL,//绝对路径
-        urls:ctx.request.url,//相对路径
-        method:ctx.request.method,
-        body:ctx.request.body,
-        imageUrl:`${DOWNLOAD_URL}/${ctx.request.files.image.newFilename}`
-    }
-    await next();
-})
+// app.use(async(ctx,next)=>{
+//     console.log(ctx.request.files.image.newFilename)
+//     ctx.body = {
+//         params:ctx.request.query,
+//         url:ctx.request.URL,//绝对路径
+//         urls:ctx.request.url,//相对路径
+//         method:ctx.request.method,
+//         body:ctx.request.body,
+//         imageUrl:`${DOWNLOAD_URL}/${ctx.request.files.image.newFilename}`
+//     }
+//     await next();
+// })
+
+//使用router
+app.use(router.routes()).use(router.allowedMethods());
 
 //启动服务器，监听端口
 app.listen(3000,'127.0.0.1',()=>{
