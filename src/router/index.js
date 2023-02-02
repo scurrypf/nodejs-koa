@@ -1,6 +1,7 @@
 const KoaRouter = require('koa-router')
 const {loginCtl} = require('../controller/login/index');
-const {uploadSingle} = require('../controller/upload/uploadSingle')
+const {uploadSingle} = require('../controller/upload/uploadSingle');
+const {uploadMultip} = require('../controller/upload/uploadMultip')
 
 
 const router = new KoaRouter({
@@ -36,9 +37,11 @@ router.post('/file',(ctx)=>{
     // ctx.body = ctx.request.body
 })
 
-router.post('/login',loginCtl)
+router.post('/login',loginCtl);
 
-router.post('/uploadsingle',uploadSingle)
+router.post('/uploadsingle',uploadSingle);
+
+router.post('/uploadmulti',uploadMultip);
 
 module.exports = {
     router
