@@ -4,7 +4,8 @@ const KoaStatic = require('koa-static');
 const KoaMount = require('koa-mount');
 const { koaBody } = require('koa-body');
 const path = require('path');
-const {router} = require('./src/router/index')
+const {router} = require('./src/router/index');
+const koaCors = require('@koa/cors');
 //创建一个koa应用
 const app = new Koa();
 
@@ -76,6 +77,9 @@ app.use(koaBody({
 //     }
 //     await next();
 // })
+
+//使用@koa/cors,解决跨域问题
+app.use(koaCors());
 
 //使用router
 app.use(router.routes()).use(router.allowedMethods());

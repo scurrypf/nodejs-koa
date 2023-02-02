@@ -49,6 +49,14 @@ router.post('/file',(ctx)=>{
     // ctx.body = ctx.request.body
 })
 
+router.post('/login',(ctx)=>{
+    if(ctx.request.body.username === 'kokomi' && ctx.request.body.pass === '123456'){
+        ctx.body = suc({ token:'ZPFLLLKOKOMI' })
+    }else{
+        ctx.body = failure('请求失败','lll')
+    }
+})
+
 module.exports = {
     router
 }
