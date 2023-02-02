@@ -27,29 +27,13 @@ const DownLoad = KoaStatic('./static',{
         res.setHeader('content-disposition','attachment')
     }
 })
+//网站托管
 const WebSite = KoaStatic('./dist');
 
+///download下载路径
 app.use(KoaMount('/download',DownLoad));
+//默认路径打开网站
 app.use(KoaMount('/',WebSite))
-// app.use(KoaMount('/api'))
-
-// app.use(async(ctx, next) => {
-//     console.log('1')
-//     await next();
-//     console.log('2')
-//     //await next();
-// })
-// app.use(async(ctx, next) => {
-//     console.log('3')
-//     await next();
-//     console.log('4')
-//     //await next()
-// })
-// app.use(async(ctx, next) => {
-//     console.log('5')
-//     await next();
-//     console.log('6')
-// })
 
 // const midFun = (ctx) =>{
 //     ctx.body = 'Hello World';
