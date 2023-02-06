@@ -14,22 +14,21 @@ function createToken(playload){
     const token = Jwt.sign({
         playload,
         // token有效期
-        exp: Math.floor(Date.now() / 1000) + 1 
+        exp: Math.floor(Date.now() / 1000) + (60 * 60 *24) 
     },SECRIT_KEY)
     return token;
 }
 
-// verify token
+// verify token(验证token)
 function verifyToken(token) {
     try {
-        const tokenData = Jwt.verify(token, SECRET_KEY)
+        const tokenData = Jwt.verify(token, SECRIT_KEY)
         return tokenData;
     } catch (err) {
         console.log(err)
         return false;
     }
 }
-
 module.exports = {
     createToken,
     verifyToken,

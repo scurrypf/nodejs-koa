@@ -6,11 +6,15 @@ const { koaBody } = require('koa-body');
 const path = require('path');
 const {router} = require('./src/router/index');
 const koaCors = require('@koa/cors');
+const { isValid} = require('./src/middleware/koa-jwt')
+
 //创建一个koa应用
 const app = new Koa();
 
 let UPLOAD_URL = path.join(__dirname,'./static')
 let DOWNLOAD_URL = "http://127.0.0.1:3000/download"
+
+
 
 //处理请求和响应
 //中间件
@@ -30,10 +34,14 @@ const DownLoad = KoaStatic('./static',{
 //网站托管
 const WebSite = KoaStatic('./dist');
 
+app.use(isValid);
+
 ///download下载路径
 app.use(KoaMount('/download',DownLoad));
 //默认路径打开网站
 app.use(KoaMount('/',WebSite))
+
+
 
 // const midFun = (ctx) =>{
 //     ctx.body = 'Hello World';

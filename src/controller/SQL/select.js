@@ -17,6 +17,23 @@ async function queryAll(ctx) {
     // return rows;
 }
 
+async function queryUser(){
+    const mysqlIns = await Mysql.createConnection({
+        host:'127.0.0.1', 
+        user: 'root', 
+        database: 'nodejs-koa', 
+        password: '781514', 
+        port: 3306,
+        // 设置数据库查询UTF-8
+        charset:'UTF8_GENERAL_CI'
+    });
+    const rows = await mysqlIns.execute(`SELECT * FROM user;`)
+    return rows[0];
+}
+
+// queryUser();
+
 module.exports = {
     queryAll,
+    queryUser
 }
