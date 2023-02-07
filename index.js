@@ -34,14 +34,14 @@ const DownLoad = KoaStatic('./static',{
 //网站托管
 const WebSite = KoaStatic('./dist');
 
-app.use(isValid);
+
 
 ///download下载路径
 app.use(KoaMount('/download',DownLoad));
 //默认路径打开网站
 app.use(KoaMount('/',WebSite))
 
-
+app.use(isValid);
 
 // const midFun = (ctx) =>{
 //     ctx.body = 'Hello World';
