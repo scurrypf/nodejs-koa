@@ -17,7 +17,7 @@ async function queryAll(ctx) {
     // return rows;
 }
 
-async function queryUser(){
+async function queryUser(ctx){
     const mysqlIns = await Mysql.createConnection({
         host:'127.0.0.1', 
         user: 'root', 
@@ -27,11 +27,11 @@ async function queryUser(){
         // 设置数据库查询UTF-8
         charset:'UTF8_GENERAL_CI'
     });
-    const rows = await mysqlIns.execute(`SELECT * FROM user;`)
+    const rows = await mysqlIns.execute(`SELECT * FROM user;`);
+    ctx.body = suc(rows[0]);
     return rows[0];
 }
 
-// queryUser();
 
 module.exports = {
     queryAll,

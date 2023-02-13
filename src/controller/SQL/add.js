@@ -15,8 +15,8 @@ async function addUser(ctx) {
     // mysqlIns.execute(`INSERT INTO user(username, pass) values ('')`)
     let {username,sex,pass} = ctx.request.body;
     // TODO:这里正常需要对前端传来的数据进行一次校验
-    let passHash = getHash(pass);
-    let sql = `INSERT INTO user(username,sex,pass) VALUES ('${username}' , '${sex}' , '${passHash}')`;
+    // let passHash = getHash(pass);
+    let sql = `INSERT INTO user(username,sex,pass) VALUES ('${username}' , '${sex}' , '${pass}')`;
     // 此处需要参数校验
     const isValid = await mysqlIns.execute(sql);
     if (isValid) {

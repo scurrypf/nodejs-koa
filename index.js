@@ -41,7 +41,7 @@ app.use(KoaMount('/download',DownLoad));
 //默认路径打开网站
 app.use(KoaMount('/',WebSite))
 
-app.use(isValid);
+// app.use(isValid);
 
 // const midFun = (ctx) =>{
 //     ctx.body = 'Hello World';
