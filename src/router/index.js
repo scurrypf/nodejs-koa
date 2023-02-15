@@ -1,8 +1,8 @@
 const KoaRouter = require('koa-router')
-const {loginCtl} = require('../controller/login/index');
+const {loginCtl,adminLoginCtl} = require('../controller/login/index');
 const {uploadSingle} = require('../controller/upload/uploadSingle');
 const {uploadMultip} = require('../controller/upload/uploadMultip');
-const {queryUser,queryUserFont} = require('../controller/SQL/select');
+const {queryAll,queryUserFont} = require('../controller/SQL/select');
 const {addUser} = require('../controller/SQL/add');
 const {deleteUser} = require('../controller/SQL/delete');
 const {updateUser} = require('../controller/SQL/update')
@@ -43,11 +43,15 @@ router.post('/file',(ctx)=>{
 
 router.post('/login',loginCtl);
 
+router.post('/adminlogin',adminLoginCtl);
+
 router.post('/uploadsingle',uploadSingle);
 
 router.post('/uploadmulti',uploadMultip);
 
-router.get('/select',queryUserFont);
+router.get('/queryall',queryAll);
+
+router.post('/select',queryUserFont);
 
 router.post('/sql/adduser',addUser);
 

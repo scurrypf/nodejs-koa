@@ -12,12 +12,8 @@ async function updateUser(ctx) {
         // 设置数据库查询UTF-8
         charset:'UTF8_GENERAL_CI'
     });
-    let {username,sex,pass,id} = ctx.request.body;
-    // if(username){
-
-    // }
-    let sql = `UPDATE user SET username = '${username}' , sex = '${sex}', pass = '${pass}' WHERE id = '${id}'`;
-    // const isValid = await 
+    let {username,sex,pass,id,post} = ctx.request.body;
+    let sql = `UPDATE user SET username = '${username}' , sex = '${sex}', pass = '${pass}' , post = '${post}' WHERE id = '${id}'`;
     mysqlIns.execute(sql);
 }
 

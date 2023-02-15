@@ -11,12 +11,11 @@ async function deleteUser(ctx) {
         // 设置数据库查询UTF-8
         charset:'UTF8_GENERAL_CI'
     });
-    let {username,id} = ctx.request.body;
+    let {id} = ctx.request.body;
     // let sql = "DELETE FROM `user` WHERE `username` ='" + username + "'";
     // let sql = `DELETE FROM user WHERE username ='${username}'`;
     let sql = `DELETE FROM user WHERE (id ='${id}')`;
     const isValid = await mysqlIns.execute(sql);
-    // console.log(isValid[0].affectedRows);
     if(isValid[0].affectedRows){
         ctx.body = suc({msg:"删除成功"})
     }else{
