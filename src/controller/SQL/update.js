@@ -17,6 +17,23 @@ async function updateUser(ctx) {
     mysqlIns.execute(sql);
 }
 
+async function updatePlayer(ctx) {
+    const mysqlIns = await Mysql.createConnection({
+        host:'127.0.0.1', 
+        user: 'root', 
+        database: 'nodejs-koa', 
+        password: '781514', 
+        port: 3306,
+        // 设置数据库查询UTF-8
+        charset:'UTF8_GENERAL_CI'
+    });
+    let {name,number,height,weight,reach,play,id} = ctx.request.body;
+    let sql = `UPDATE player SET name = '${name}' , number = '${number}', height = '${height}' , weight = '${weight}' ,
+                                reach = '${reach}' , play = '${play}' WHERE id = '${id}'`;
+    mysqlIns.execute(sql);
+}
+
 module.exports = {
     updateUser,
+    updatePlayer
 }

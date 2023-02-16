@@ -2,10 +2,10 @@ const KoaRouter = require('koa-router')
 const {loginCtl,adminLoginCtl} = require('../controller/login/index');
 const {uploadSingle} = require('../controller/upload/uploadSingle');
 const {uploadMultip} = require('../controller/upload/uploadMultip');
-const {queryAll,queryUserFont} = require('../controller/SQL/select');
-const {addUser} = require('../controller/SQL/add');
-const {deleteUser} = require('../controller/SQL/delete');
-const {updateUser} = require('../controller/SQL/update')
+const {queryAll,queryUserFont,queryPlayer,queryPlayerall} = require('../controller/SQL/select');
+const {addUser,addPlayer} = require('../controller/SQL/add');
+const {deleteUser,deletePlayer} = require('../controller/SQL/delete');
+const {updateUser,updatePlayer} = require('../controller/SQL/update');
 
 
 const router = new KoaRouter({
@@ -41,23 +41,27 @@ router.post('/file',(ctx)=>{
     // ctx.body = ctx.request.body
 })
 
+//登录路由
 router.post('/login',loginCtl);
-
 router.post('/adminlogin',adminLoginCtl);
 
+// 上传文件
 router.post('/uploadsingle',uploadSingle);
-
 router.post('/uploadmulti',uploadMultip);
 
+// 用户表CRUD
 router.get('/queryall',queryAll);
-
 router.post('/select',queryUserFont);
-
 router.post('/sql/adduser',addUser);
-
 router.post('/sql/delete',deleteUser);
-
 router.post('/sql/update',updateUser);
+
+// 球员表CRUD
+router.post('/player/select',queryPlayer);
+router.post('/player/add',addPlayer);
+router.post('/player/delete',deletePlayer);
+router.post('/player/update',updatePlayer);
+router.get('/player/queryall',queryPlayerall);
 
 module.exports = {
     router
