@@ -47,7 +47,52 @@ async function addPlayer(ctx) {
     }
 }
 
+async function addPlayerdata(ctx) {
+    const mysqlIns = await Mysql.createConnection({
+        host:'127.0.0.1', 
+        user: 'root', 
+        database: 'nodejs-koa', 
+        password: '781514', 
+        port: 3306,
+        // 设置数据库查询UTF-8
+        charset:'UTF8_GENERAL_CI'
+    });
+    let {name,time,score,backboard,assist,stolen,block,EPM,LEBRON,RAPTOR,BPM} = ctx.request.body;
+    let sql = `INSERT INTO playerdata(name,time,score,backboard,assist,stolen,block,EPM,LEBRON,RAPTOR,BPM) 
+    VALUES ('${name}' , '${time}' , '${score}' , '${backboard}','${assist}' , '${stolen}' , '${block}' , '${EPM}',
+    '${LEBRON}' , '${RAPTOR}' , '${BPM}')`;
+    const isValid = await mysqlIns.execute(sql);
+    if (isValid) {
+        ctx.body = suc({ msg: '添加成功' })
+    } else {
+        ctx.body = failure('添加失败')
+    }
+}
+
+async function addSales(ctx) {
+    const mysqlIns = await Mysql.createConnection({
+        host:'127.0.0.1', 
+        user: 'root', 
+        database: 'nodejs-koa', 
+        password: '781514', 
+        port: 3306,
+        // 设置数据库查询UTF-8
+        charset:'UTF8_GENERAL_CI'
+    });
+    let {name,saletype,contract,currentsale,nextsale} = ctx.request.body;
+    let sql = `INSERT INTO playsale(name,saletype,contract,currentsale,nextsale) VALUES ('${name}' , '${saletype}' , '${contract}' ,
+     '${currentsale}', '${nextsale}')`;
+    const isValid = await mysqlIns.execute(sql);
+    if (isValid) {
+        ctx.body = suc({ msg: '添加成功' })
+    } else {
+        ctx.body = failure('添加失败')
+    }
+}
+
 module.exports = {
     addUser,
-    addPlayer
+    addPlayer,
+    addPlayerdata,
+    addSales
 }

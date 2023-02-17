@@ -33,7 +33,42 @@ async function updatePlayer(ctx) {
     mysqlIns.execute(sql);
 }
 
+async function updatePlayerdata(ctx) {
+    const mysqlIns = await Mysql.createConnection({
+        host:'127.0.0.1', 
+        user: 'root', 
+        database: 'nodejs-koa', 
+        password: '781514', 
+        port: 3306,
+        // 设置数据库查询UTF-8
+        charset:'UTF8_GENERAL_CI'
+    });
+    let {name,time,score,backboard,assist,stolen,block,EPM,LEBRON,RAPTOR,BPM} = ctx.request.body;
+    let sql = `UPDATE playerdata SET time = '${time}', score = '${score}' ,
+    backboard = '${backboard}' , assist = '${assist}' , stolen = '${stolen}' , 
+    block = '${block}' ,EPM = '${EPM}' , LEBRON = '${LEBRON}' ,RAPTOR = '${RAPTOR}' , BPM = '${BPM}' WHERE name = '${name}'`;
+    mysqlIns.execute(sql);
+}
+
+async function updateSales(ctx) {
+    const mysqlIns = await Mysql.createConnection({
+        host:'127.0.0.1', 
+        user: 'root', 
+        database: 'nodejs-koa', 
+        password: '781514', 
+        port: 3306,
+        // 设置数据库查询UTF-8
+        charset:'UTF8_GENERAL_CI'
+    });
+    let {name,saletype,contract,currentsale,nextsale} = ctx.request.body;
+    let sql = `UPDATE playsale SET saletype = '${saletype}', contract = '${contract}' ,
+    currentsale = '${currentsale}' , nextsale = '${nextsale}'  WHERE name = '${name}'`;
+    mysqlIns.execute(sql);
+}
+
 module.exports = {
     updateUser,
-    updatePlayer
+    updatePlayer,
+    updatePlayerdata,
+    updateSales
 }

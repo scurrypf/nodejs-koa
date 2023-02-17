@@ -93,11 +93,79 @@ async function queryPlayerall(ctx){
     return rows[0];
 }
 
+async function queryPlayerdata(ctx){
+    const mysqlIns = await Mysql.createConnection({
+        host:'127.0.0.1', 
+        user: 'root', 
+        database: 'nodejs-koa', 
+        password: '781514', 
+        port: 3306,
+        // 设置数据库查询UTF-8
+        charset:'UTF8_GENERAL_CI'
+    });
+    let {start} = ctx.request.body;
+    console.log(start);
+    const rows = await mysqlIns.execute(`SELECT * FROM playerdata LIMIT ${start}, 6`);
+    ctx.body = suc(rows[0]); 
+    return rows[0];
+}
+
+async function queryPlayerdataall(ctx){
+    const mysqlIns = await Mysql.createConnection({
+        host:'127.0.0.1', 
+        user: 'root', 
+        database: 'nodejs-koa', 
+        password: '781514', 
+        port: 3306,
+        // 设置数据库查询UTF-8
+        charset:'UTF8_GENERAL_CI'
+    });
+    const rows = await mysqlIns.execute(`SELECT * FROM playerdata`);
+    ctx.body = suc(rows[0]); 
+    return rows[0];
+}
+
+async function querySales(ctx){
+    const mysqlIns = await Mysql.createConnection({
+        host:'127.0.0.1', 
+        user: 'root', 
+        database: 'nodejs-koa', 
+        password: '781514', 
+        port: 3306,
+        // 设置数据库查询UTF-8
+        charset:'UTF8_GENERAL_CI'
+    });
+    let {start} = ctx.request.body;
+    console.log(start);
+    const rows = await mysqlIns.execute(`SELECT * FROM playsale LIMIT ${start}, 6`);
+    ctx.body = suc(rows[0]); 
+    return rows[0];
+}
+
+async function querySalesall(ctx){
+    const mysqlIns = await Mysql.createConnection({
+        host:'127.0.0.1', 
+        user: 'root', 
+        database: 'nodejs-koa', 
+        password: '781514', 
+        port: 3306,
+        // 设置数据库查询UTF-8
+        charset:'UTF8_GENERAL_CI'
+    });
+    const rows = await mysqlIns.execute(`SELECT * FROM playsale`);
+    ctx.body = suc(rows[0]); 
+    return rows[0];
+}
+
 module.exports = {
     queryAll,
     queryUser,
     queryUserFont,
     queryAdmin,
     queryPlayer,
-    queryPlayerall
+    queryPlayerall,
+    queryPlayerdata,
+    queryPlayerdataall,
+    querySales,
+    querySalesall
 }

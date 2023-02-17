@@ -2,10 +2,10 @@ const KoaRouter = require('koa-router')
 const {loginCtl,adminLoginCtl} = require('../controller/login/index');
 const {uploadSingle} = require('../controller/upload/uploadSingle');
 const {uploadMultip} = require('../controller/upload/uploadMultip');
-const {queryAll,queryUserFont,queryPlayer,queryPlayerall} = require('../controller/SQL/select');
-const {addUser,addPlayer} = require('../controller/SQL/add');
-const {deleteUser,deletePlayer} = require('../controller/SQL/delete');
-const {updateUser,updatePlayer} = require('../controller/SQL/update');
+const {queryAll,queryUserFont,queryPlayer,queryPlayerall,queryPlayerdata,queryPlayerdataall,querySales,querySalesall} = require('../controller/SQL/select');
+const {addUser,addPlayer,addPlayerdata,addSales} = require('../controller/SQL/add');
+const {deleteUser,deletePlayer,deletePlayerdata,deleteSales} = require('../controller/SQL/delete');
+const {updateUser,updatePlayer,updatePlayerdata,updateSales} = require('../controller/SQL/update');
 
 
 const router = new KoaRouter({
@@ -62,6 +62,20 @@ router.post('/player/add',addPlayer);
 router.post('/player/delete',deletePlayer);
 router.post('/player/update',updatePlayer);
 router.get('/player/queryall',queryPlayerall);
+
+// 球员数据表CRUD
+router.post('/playerdata/select',queryPlayerdata);
+router.post('/playerdata/add',addPlayerdata);
+router.post('/playerdata/delete',deletePlayerdata);
+router.post('/playerdata/update',updatePlayerdata);
+router.get('/playerdata/queryall',queryPlayerdataall);
+
+// 球员薪资表CRUD
+router.post('/playersale/select',querySales);
+router.post('/playersale/add',addSales);
+router.post('/playersale/delete',deleteSales);
+router.post('/playersale/update',updateSales);
+router.get('/playersale/queryall',querySalesall);
 
 module.exports = {
     router
