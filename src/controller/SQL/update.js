@@ -17,6 +17,21 @@ async function updateUser(ctx) {
     mysqlIns.execute(sql);
 }
 
+async function updateAdmin(ctx) {
+    const mysqlIns = await Mysql.createConnection({
+        host:'127.0.0.1', 
+        user: 'root', 
+        database: 'nodejs-koa', 
+        password: '781514', 
+        port: 3306,
+        // 设置数据库查询UTF-8
+        charset:'UTF8_GENERAL_CI'
+    });
+    let {user,sex,pass} = ctx.request.body;
+    let sql = `UPDATE admin SET sex = '${sex}', pass = '${pass}' WHERE user = '${user}'`;
+    mysqlIns.execute(sql);
+}
+
 async function updatePlayer(ctx) {
     const mysqlIns = await Mysql.createConnection({
         host:'127.0.0.1', 
@@ -70,5 +85,6 @@ module.exports = {
     updateUser,
     updatePlayer,
     updatePlayerdata,
-    updateSales
+    updateSales,
+    updateAdmin
 }

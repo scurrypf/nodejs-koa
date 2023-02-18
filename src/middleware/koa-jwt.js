@@ -5,6 +5,7 @@ const whiteList = [
     '/api/login',
     '/',
     '/download',
+    '/api/adminlogin'
 ]
 
 const isValid = async function(ctx,next){

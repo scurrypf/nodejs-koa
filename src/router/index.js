@@ -2,10 +2,10 @@ const KoaRouter = require('koa-router')
 const {loginCtl,adminLoginCtl} = require('../controller/login/index');
 const {uploadSingle} = require('../controller/upload/uploadSingle');
 const {uploadMultip} = require('../controller/upload/uploadMultip');
-const {queryAll,queryUserFont,queryPlayer,queryPlayerall,queryPlayerdata,queryPlayerdataall,querySales,querySalesall} = require('../controller/SQL/select');
+const {queryAll,queryUserFont,queryAdminall,queryPlayer,queryPlayerall,queryPlayerdata,queryPlayerdataall,querySales,querySalesall} = require('../controller/SQL/select');
 const {addUser,addPlayer,addPlayerdata,addSales} = require('../controller/SQL/add');
 const {deleteUser,deletePlayer,deletePlayerdata,deleteSales} = require('../controller/SQL/delete');
-const {updateUser,updatePlayer,updatePlayerdata,updateSales} = require('../controller/SQL/update');
+const {updateUser,updatePlayer,updatePlayerdata,updateSales,updateAdmin} = require('../controller/SQL/update');
 
 
 const router = new KoaRouter({
@@ -44,6 +44,8 @@ router.post('/file',(ctx)=>{
 //登录路由
 router.post('/login',loginCtl);
 router.post('/adminlogin',adminLoginCtl);
+router.get('/admin/select',queryAdminall);
+router.post('/admin/update',updateAdmin);
 
 // 上传文件
 router.post('/uploadsingle',uploadSingle);
